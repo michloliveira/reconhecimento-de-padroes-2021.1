@@ -7,15 +7,35 @@ x =  iris.data
 y = iris.target
 
 #Criando conjunto de treino
-TreinoSetosa= iris.data[:25]
-TreinoVersicolor = iris.data[50:75]
-TreinoVirginica= iris.data[100:125]
+#data
+TreinoSetosaX= iris.data[:25]
+TreinoVersicolorX = iris.data[50:75]
+TreinoVirginicaX= iris.data[100:125]
+TreinoX =  np.concatenate((TreinoSetosaX,TreinoVersicolorX,TreinoVirginicaX))
 
-Treino =  np.concatenate((TreinoSetosa,TreinoVersicolor,TreinoVirginica))
+#target
+TreinoSetosaY= iris.target[:25]
+TreinoVersicolorY = iris.target[50:75]
+TreinoVirginicaY= iris.target[100:125]
+TreinoY =  np.concatenate((TreinoSetosaY,TreinoVersicolorY,TreinoVirginicaY))
 
 #criando conjunto de teste
-TesteSetosa= iris.data[:25]
-TesteVersicolor = iris.data[50:75]
-TesteVirginica= iris.data[100:125]
+#data
+TesteSetosaX= iris.data[25:50]
+TesteVersicolorX = iris.data[75:100]
+TesteVirginicaX= iris.data[125:150]
+testeX = np.concatenate((TesteSetosaX,TesteVersicolorX,TesteVirginicaX))
 
-teste = np.concatenate((TesteSetosa,TesteVersicolor,TesteVirginica))
+#target
+TesteSetosaY= iris.target[25:50]
+TesteVersicolorY = iris.target[75:100]
+TesteVirginicaY= iris.target[125:150]
+testeY = np.concatenate((TesteSetosaY,TesteVersicolorY,TesteVirginicaY))
+
+#k-nn var
+
+knn = KNeighborsClassifier(n_neighbors=1, weights= "uniform", metric= "euclidean")
+knn.fit(TreinoX,TreinoY)
+
+print(knn.predict(testeX))
+print(knn.score(testeX, testeY))
