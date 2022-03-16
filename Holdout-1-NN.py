@@ -3,6 +3,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.datasets import load_wine
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
 
 def make_matriz_confusion(y_true,y_pred):
     matrix_confusion = [[0,0,0],
@@ -55,6 +57,30 @@ def calcular_taxa_de_acerto(matriz_confusion):
     print(taxa_acerto)
     print("A taxa de acerto é {0:.2f}".format(taxa_acerto))
 
+def calcular_taxa_de_precisao(matriz_confusion):
+    # precisao = taxa_de_acerto da classe / soma de toda classe
+
+    #taxa de precisao classe 0
+    classe_0 = matriz_confusion[0][0] / (matriz_confusion[0][0] + matriz_confusion[1][0] + matriz_confusion[2][0])
+    #taxa de precisao classe 1
+    classe_1 = matriz_confusion[1][1] / (matriz_confusion[0][1] + matriz_confusion[1][1] + matriz_confusion[2][1])
+    #taxa de precisao classe 2
+    classe_2 = matriz_confusion[2][2] / (matriz_confusion[0][2] + matriz_confusion[1][2] + matriz_confusion[2][2])
+
+    print("Taxa de Precisão:\nClasse 0 = {0:.2f}\nClasse 1 = {1:.2f}\nClasse 2 = {2:.2f}".format(classe_0, classe_1, classe_2))
+
+def calcular_taxa_de_recall(matriz_confusion):
+    #recall = taxa_de acerto da classe / soma da linha com outras classes
+
+    #taxa de recall classe 1
+    classe_0 = matriz_confusion[0][0] / (matriz_confusion[0][0] + matriz_confusion[0][1] + matriz_confusion[0][2])
+    #taxa de recall classe 1
+    classe_1 = matriz_confusion[1][1] / (matriz_confusion[1][0] + matriz_confusion[1][1] + matriz_confusion[1][2])
+    #taxa de recall classe 2
+    classe_2 = matriz_confusion[2][2] / (matriz_confusion[2][0] + matriz_confusion[2][1] + matriz_confusion[2][2])     
+
+    print("Taxa de Recall:\nClasse 0 = {0:.2f}\nClasse 1 = {1:.2f}\nClasse 2 = {2:.2f}".format(classe_0, classe_1, classe_2))
+
 x,y = load_wine(return_X_y = True)
 treinoX, testeX, treinoY, testeY = train_test_split(x,y,test_size=0.30) #test_size proporção 
 
@@ -63,10 +89,14 @@ knn.fit(treinoX,treinoY)
 
 y_pred = knn.predict(testeX)
 y_true = testeY
-#print(confusion_matrix(y_true,y_pred)) #confusion_matrix(y_true, y_pred) API
+print(confusion_matrix(y_true,y_pred)) #confusion_matrix(y_true, y_pred) API
 matriz_confusion = make_matriz_confusion(y_true,y_pred)
 print(matriz_confusion[0])
 print(matriz_confusion[1])
 print(matriz_confusion[2])
 
 calcular_taxa_de_acerto(matriz_confusion)
+calcular_taxa_de_precisao(matriz_confusion)
+print(precision_score(y_true,y_pred,average=None))
+calcular_taxa_de_recall(matriz_confusion)
+print(recall_score(y_true,y_pred,average=None))
