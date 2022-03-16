@@ -61,6 +61,7 @@ def calcular_taxa_de_acerto(matriz_confusion):
     taxa_acerto = soma_diagonal / soma_total
     #print(taxa_acerto)
     print("A taxa de acerto é {0:.2f}".format(taxa_acerto))
+    return taxa_acerto
 
 def calcular_taxa_de_precisao(matriz_confusion):
     # precisao = taxa_de_acerto da classe / soma de toda classe
@@ -74,6 +75,8 @@ def calcular_taxa_de_precisao(matriz_confusion):
 
     print("Taxa de Precisão:\nClasse 0 = {0:.2f}\nClasse 1 = {1:.2f}\nClasse 2 = {2:.2f}".format(classe_0, classe_1, classe_2))
 
+    return classe_0, classe_1, classe_2
+
 def calcular_taxa_de_recall(matriz_confusion):
     #recall = taxa_de acerto da classe / soma da linha com outras classes
 
@@ -85,6 +88,15 @@ def calcular_taxa_de_recall(matriz_confusion):
     classe_2 = matriz_confusion[2][2] / (matriz_confusion[2][0] + matriz_confusion[2][1] + matriz_confusion[2][2])     
 
     print("Taxa de Recall:\nClasse 0 = {0:.2f}\nClasse 1 = {1:.2f}\nClasse 2 = {2:.2f}".format(classe_0, classe_1, classe_2))
+    
+    return classe_0, classe_1, classe_2
+
+def calcular_f1(taxa_acerto, pClasse0, pClass1, pClasse2, rClasse0, rClass1, rClasse2):
+
+
+
+
+
 
 x,y = load_wine(return_X_y = True)
 treinoX, testeX, treinoY, testeY = train_test_split(x,y,test_size=0.30) #test_size proporção 
@@ -98,8 +110,8 @@ y_true = testeY
 
 print(confusion_matrix(y_true,y_pred)) #confusion_matrix(y_true, y_pred) API
 matriz_confusion = make_matriz_confusion(y_true,y_pred)
-calcular_taxa_de_acerto(matriz_confusion)
-calcular_taxa_de_precisao(matriz_confusion)
+taxa_acerto = calcular_taxa_de_acerto(matriz_confusion)
+pClasse0, pClass1, pClasse2 = calcular_taxa_de_precisao(matriz_confusion)
 print(precision_score(y_true,y_pred,average=None))
-calcular_taxa_de_recall(matriz_confusion)
+rClasse0, rClass1, rClasse2 = calcular_taxa_de_recall(matriz_confusion)
 print(recall_score(y_true,y_pred,average=None))
