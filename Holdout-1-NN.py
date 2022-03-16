@@ -37,6 +37,11 @@ def make_matriz_confusion(y_true,y_pred):
             else:
                 matrix_confusion[2][2] +=1
         i= i+1
+    #print
+    print(matrix_confusion[0])
+    print(matrix_confusion[1])
+    print(matrix_confusion[2])
+
     return matrix_confusion
 
 def calcular_taxa_de_acerto(matriz_confusion):
@@ -50,11 +55,11 @@ def calcular_taxa_de_acerto(matriz_confusion):
         for j in range(3):
             soma_total += matriz_confusion[i][j]
     
-    print(soma_total)
-    print(soma_diagonal)
+    #print(soma_total)
+    #print(soma_diagonal)
 
     taxa_acerto = soma_diagonal / soma_total
-    print(taxa_acerto)
+    #print(taxa_acerto)
     print("A taxa de acerto é {0:.2f}".format(taxa_acerto))
 
 def calcular_taxa_de_precisao(matriz_confusion):
@@ -89,12 +94,10 @@ knn.fit(treinoX,treinoY)
 
 y_pred = knn.predict(testeX)
 y_true = testeY
+
+
 print(confusion_matrix(y_true,y_pred)) #confusion_matrix(y_true, y_pred) API
 matriz_confusion = make_matriz_confusion(y_true,y_pred)
-print(matriz_confusion[0])
-print(matriz_confusion[1])
-print(matriz_confusion[2])
-
 calcular_taxa_de_acerto(matriz_confusion)
 calcular_taxa_de_precisao(matriz_confusion)
 print(precision_score(y_true,y_pred,average=None))
