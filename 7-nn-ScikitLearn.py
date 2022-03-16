@@ -9,5 +9,6 @@ treinoX, testeX, treinoY, testeY = train_test_split(x,y,test_size=0.5) #test_siz
 knn = KNeighborsClassifier(n_neighbors=7, weights= "distance",metric="euclidean")
 knn.fit(treinoX,treinoY)
 
+
 print(knn.predict(testeX))
 print(knn.score(testeX,testeY))
