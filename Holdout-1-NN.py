@@ -5,6 +5,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
+from sklearn.metrics import f1_score
+from sklearn.metrics import accuracy_score
 
 def make_matriz_confusion(y_true,y_pred):
     matrix_confusion = [[0,0,0],
@@ -91,11 +93,25 @@ def calcular_taxa_de_recall(matriz_confusion):
     
     return classe_0, classe_1, classe_2
 
-def calcular_f1(taxa_acerto, pClasse0, pClass1, pClasse2, rClasse0, rClass1, rClasse2):
+def calcular_f1(pClasse0, pClasse1, pClasse2, rClasse0, rClasse1, rClasse2):
+    #F1 = 2 * (precision * recall) / (precision + recall)
+    #f1 para classe 0
+    f1_c0 = 2 * (pClasse0 * rClasse0) / (pClasse0 + rClasse0)
+    #f1 para classe 1
+    f1_c1 = 2 * (pClasse1 * rClasse1) / (pClasse1 + rClasse1)
+    #f1 para classe 2
+    f1_c2 = 2 * (pClasse2 * rClasse2) / (pClasse2 + rClasse2)
+
+    print("Medida F:\nClasse 0 = {0:.2f}\nClasse 1 = {1:.2f}\nClasse 2 = {2:.2f}".format(f1_c0, f1_c1, f1_c2))
 
 
-
-
+def calcular_fp(m):
+    #falsoPositivo taxa = falsoPositivo/ falsoPositivo + verdadeiroNegativo
+   
+    fp_c0 = (m[1][0] + m[2][0]) / ((m[1][0] + m[2][0]) + (m[0][1] + m[1][1] + m[2][1] + m[0][2] + m[1][2] + m[2][2]))
+    fp_c1 = (m[0][1] + m[2][1]) / ((m[0][1] + m[2][1]) + (m[0][0] + m[1][0] + m[2][0] + m[0][2] + m[1][2] + m[2][2]))
+    fp_c2 = (m[0][2] + m[1][2]) / ((m[0][2] + m[1][2]) + (m[0][0] + m[1][0] + m[2][0] + m[0][1] + m[1][1] + m[2][1]))
+    print("Taxa Falso Positivo:\nClasse 0 = {0:.2f}\nClasse 1 = {1:.2f}\nClasse 2 = {2:.2f}".format(fp_c0, fp_c1, fp_c2))
 
 
 x,y = load_wine(return_X_y = True)
@@ -108,10 +124,15 @@ y_pred = knn.predict(testeX)
 y_true = testeY
 
 
-print(confusion_matrix(y_true,y_pred)) #confusion_matrix(y_true, y_pred) API
+print(confusion_matrix(y_true,y_pred)) #biblioteca
 matriz_confusion = make_matriz_confusion(y_true,y_pred)
 taxa_acerto = calcular_taxa_de_acerto(matriz_confusion)
-pClasse0, pClass1, pClasse2 = calcular_taxa_de_precisao(matriz_confusion)
-print(precision_score(y_true,y_pred,average=None))
-rClasse0, rClass1, rClasse2 = calcular_taxa_de_recall(matriz_confusion)
+print(accuracy_score(y_true,y_pred))
+pClasse0, pClasse1, pClasse2 = calcular_taxa_de_precisao(matriz_confusion)
+print(precision_score(y_true,y_pred,average=None)) #biblioteca
+rClasse0, rClasse1, rClasse2 = calcular_taxa_de_recall(matriz_confusion)
 print(recall_score(y_true,y_pred,average=None))
+calcular_f1(pClasse0, pClasse1, pClasse2, rClasse0, rClasse1, rClasse2)
+print(f1_score(y_true, y_pred, average=None))
+
+calcular_fp(matriz_confusion)
