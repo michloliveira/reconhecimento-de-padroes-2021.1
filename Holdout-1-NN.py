@@ -2,11 +2,6 @@ from sklearn import datasets
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.datasets import load_wine
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import precision_score
-from sklearn.metrics import recall_score
-from sklearn.metrics import f1_score
-from sklearn.metrics import accuracy_score
 
 def make_matriz_confusion(y_true,y_pred):
     matrix_confusion = [[0,0,0],
@@ -123,15 +118,9 @@ knn.fit(treinoX,treinoY)
 y_pred = knn.predict(testeX)
 y_true = testeY
 
-#print(confusion_matrix(y_true,y_pred)) #biblioteca
 matriz_confusion = make_matriz_confusion(y_true,y_pred)
-taxa_acerto = calcular_taxa_de_acerto(matriz_confusion)
-#print(accuracy_score(y_true,y_pred))
-pClasse0, pClasse1, pClasse2 = calcular_taxa_de_precisao(matriz_confusion)
-#print(precision_score(y_true,y_pred,average=None)) #biblioteca
 rClasse0, rClasse1, rClasse2 = calcular_taxa_de_recall(matriz_confusion)
-#print(recall_score(y_true,y_pred,average=None))
+taxa_acerto = calcular_taxa_de_acerto(matriz_confusion)
+pClasse0, pClasse1, pClasse2 = calcular_taxa_de_precisao(matriz_confusion)
 calcular_f1(pClasse0, pClasse1, pClasse2, rClasse0, rClasse1, rClasse2)
-print(f1_score(y_true, y_pred, average=None))
-
 calcular_fp(matriz_confusion)
