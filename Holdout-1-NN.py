@@ -108,9 +108,9 @@ def calcular_f1(pClasse0, pClasse1, pClasse2, rClasse0, rClasse1, rClasse2):
 def calcular_fp(m):
     #falsoPositivo taxa = falsoPositivo/ falsoPositivo + verdadeiroNegativo
    
-    fp_c0 = (m[1][0] + m[2][0]) / ((m[1][0] + m[2][0]) + (m[0][1] + m[1][1] + m[2][1] + m[0][2] + m[1][2] + m[2][2]))
-    fp_c1 = (m[0][1] + m[2][1]) / ((m[0][1] + m[2][1]) + (m[0][0] + m[1][0] + m[2][0] + m[0][2] + m[1][2] + m[2][2]))
-    fp_c2 = (m[0][2] + m[1][2]) / ((m[0][2] + m[1][2]) + (m[0][0] + m[1][0] + m[2][0] + m[0][1] + m[1][1] + m[2][1]))
+    fp_c0 = (m[1][0] + m[2][0]) / ((m[1][0] + m[2][0]) + (m[1][1] + m[2][1] + m[1][2] + m[2][2]))
+    fp_c1 = (m[0][1] + m[2][1]) / ((m[0][1] + m[2][1]) + (m[0][0] + m[2][0] + m[0][2] + m[2][2]))
+    fp_c2 = (m[0][2] + m[1][2]) / ((m[0][2] + m[1][2]) + (m[0][0] + m[1][0] + m[0][1] + m[1][1]))
     print("Taxa Falso Positivo:\nClasse 0 = {0:.2f}\nClasse 1 = {1:.2f}\nClasse 2 = {2:.2f}".format(fp_c0, fp_c1, fp_c2))
 
 
@@ -123,15 +123,14 @@ knn.fit(treinoX,treinoY)
 y_pred = knn.predict(testeX)
 y_true = testeY
 
-
-print(confusion_matrix(y_true,y_pred)) #biblioteca
+#print(confusion_matrix(y_true,y_pred)) #biblioteca
 matriz_confusion = make_matriz_confusion(y_true,y_pred)
 taxa_acerto = calcular_taxa_de_acerto(matriz_confusion)
-print(accuracy_score(y_true,y_pred))
+#print(accuracy_score(y_true,y_pred))
 pClasse0, pClasse1, pClasse2 = calcular_taxa_de_precisao(matriz_confusion)
-print(precision_score(y_true,y_pred,average=None)) #biblioteca
+#print(precision_score(y_true,y_pred,average=None)) #biblioteca
 rClasse0, rClasse1, rClasse2 = calcular_taxa_de_recall(matriz_confusion)
-print(recall_score(y_true,y_pred,average=None))
+#print(recall_score(y_true,y_pred,average=None))
 calcular_f1(pClasse0, pClasse1, pClasse2, rClasse0, rClasse1, rClasse2)
 print(f1_score(y_true, y_pred, average=None))
 
