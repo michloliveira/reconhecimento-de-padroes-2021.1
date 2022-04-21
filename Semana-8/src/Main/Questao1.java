@@ -24,7 +24,7 @@ public class Questao1 {
         ArrayList<Integer> lista = new ArrayList<Integer>();
         //ImagemDigital.plotarImagem(img, "Tela");
        
-        // varendo os pixels
+        // varrendo os pixels
         for(int i = 0; i < img.length; i++){
             for(int j = 0; j < img[0].length; j++){
                 if(!lista.contains(img[i][j])){
