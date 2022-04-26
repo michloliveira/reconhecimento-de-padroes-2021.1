@@ -12,14 +12,22 @@ import imagemDigital.ImagemDigital;
  */
 public class questao3 {
     static void correcao(int[][] img){
+        int max = 0;
+        int min = 255;
+        
+        //calcular máximo e minino
+        for(int i = 0; i < img.length; i++){
+            for(int j = 0; j < img[0].length; j++){
+                max = Math.max(max, img[i][j]);
+                min = Math.min(min, img[i][j]);
+            }
+        }
         //fazendo correcao
         for(int i = 0; i < img.length; i++){
             for(int j = 0; j < img[0].length; j++){
-                //System.out.println(img[i][j]);
-                img[i][j] = (int)(200) * img[i][j];
+                img[i][j] = (255 * (img[i][j] - min)) / (max - min);    
             }
         }
-        
     }
     
     
@@ -32,10 +40,13 @@ public class questao3 {
         
         for(int i = 0; i < img.length; i++){
             for(int j = 0; j < img[0].length; j++){
-                imgFinal[i][j] = (int) (img[i][j]) / img2[i][j];
+                double aux = 255 * img[i][j];
+                aux = aux / img2[i][j];
+                imgFinal[i][j] = (int) aux;
             }
         }
         
+        //ImagemDigital.plotarImagem(imgFinal, "Antess");
         correcao(imgFinal);
         
         ImagemDigital.plotarImagem(img, "Antes");
