@@ -40,9 +40,7 @@ public class questao3 {
         
         for(int i = 0; i < img.length; i++){
             for(int j = 0; j < img[0].length; j++){
-                double aux = 255 * img[i][j];
-                aux = aux / img2[i][j];
-                imgFinal[i][j] = (int) aux;
+                imgFinal[i][j] = (int) ((double) 255 *img[i][j] / img2[i][j] );
             }
         }
         

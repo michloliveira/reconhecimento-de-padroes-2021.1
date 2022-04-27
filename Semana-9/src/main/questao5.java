@@ -33,6 +33,7 @@ public class questao5 {
     }
     public static void main(String[] args) {
         int[][] img = ImagemDigital.carregarImagem("./ruido/lena1.png");
+        int[][] img10 = ImagemDigital.carregarImagem("./ruido/lena1.png");
         ImagemDigital.plotarImagem(img, "Before");
         
         int n =  100;
@@ -44,8 +45,20 @@ public class questao5 {
                 }
             }
         }
-
         correcao(img);
         ImagemDigital.plotarImagem(img, "After");
+        
+        n =  10;
+        for(int k = 1; k <= n; k++){
+            int[][] img2 = ImagemDigital.carregarImagem("./ruido/lena" + k + ".png");
+            for(int i = 0; i < img.length; i++){
+                for(int j = 0; j < img[0].length; j++){
+                    img10[i][j] = img[i][j] + img2[i][j];
+                }
+            }
+        }
+        correcao(img10);
+        ImagemDigital.plotarImagem(img10, "media de 10");
+
     }
 }
