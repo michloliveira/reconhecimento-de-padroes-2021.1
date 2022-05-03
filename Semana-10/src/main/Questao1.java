@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package Main;
+package main;
+
+import imagemDigital.ImagemDigital;
 
 /**
  *
@@ -10,11 +12,39 @@ package Main;
  */
 public class Questao1 {
 
-    /**
-     * @param args the command line arguments
-     */
+   static void correcao(int[][] img){
+        int max = 0;
+        int min = 255;
+        
+        //calcular máximo e minino
+        for(int i = 0; i < img.length; i++){
+            for(int j = 0; j < img[0].length; j++){
+                max = Math.max(max, img[i][j]);
+                min = Math.min(min, img[i][j]);
+            }
+        }
+        //fazendo correcao
+        for(int i = 0; i < img.length; i++){
+            for(int j = 0; j < img[0].length; j++){
+                img[i][j] = (255 * (img[i][j] - min)) / (max - min);    
+            }
+        }
+        
+    }
+   
     public static void main(String[] args) {
-        // TODO code application logic here
+        int[][] img = ImagemDigital.carregarImagem("./imagens/Fig0304(a)(breast_digital_Xray).png");
+        
+        ImagemDigital.plotarImagem(img, "Imagem Original");
+        
+        for(int i = 0; i < img.length; i++){
+            for(int j = 0; j < img[0].length; j++){
+                img[i][j] = (255 - 1) - img[i][j];
+            }
+        }
+        
+        correcao(img);
+        ImagemDigital.plotarImagem(img, "Imagem Negativa");
     }
     
 }

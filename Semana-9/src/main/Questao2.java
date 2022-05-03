@@ -36,7 +36,7 @@ public class Questao2 {
     
     public static void main(String[] args) {
         int[][] img = ImagemDigital.carregarImagem("./imagens/Fig0228(a)(angiography_mask_image).png");
-        int[][] img2 = ImagemDigital.carregarImagem("./imagens/Fig0228(b)(angiography_live_ image).png");
+        int[][] img2 = new int[img.length][img[0].length];
         
         int[][] firstMinusSecond = new int[420][420];
         int[][] secundMinusFirst = new int[420][420];
