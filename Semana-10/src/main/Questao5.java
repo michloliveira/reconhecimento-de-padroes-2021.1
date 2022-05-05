@@ -10,7 +10,7 @@ import imagemDigital.ImagemDigital;
  *
  * @author michel
  */
-public class questao5 {
+public class Questao5 {
     static void correcao(int[][][] img){
         int maxR = 0;
         int maxG = 0;
