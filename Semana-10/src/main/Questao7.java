@@ -20,11 +20,11 @@ public class Questao7 {
         for(int i = 0; i < img.length; i++){
             for(int j = 0; j < img[0].length; j++){
                 
-                if(img[i][j] >= 100 && img[i][j] <= 150){
-                    img2[i][j] = 153;
+                if(img[i][j] >= 100 && img[i][j] <= 130){
+                    img2[i][j] =  125;
                 }
                 else{
-                     img2[i][j] = 25;
+                    img2[i][j] = img[i][j];
                 }
             }
         }

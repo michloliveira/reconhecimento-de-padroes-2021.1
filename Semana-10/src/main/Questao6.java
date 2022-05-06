@@ -34,24 +34,22 @@ public class Questao6 {
     public static void main(String[] args) {
         int[][] img = ImagemDigital.carregarImagem("./imagens/Fig0310(b)(washed_out_pollen_image).png");
         int[][] img2 = new int[img.length][img[0].length];
+        int[][] img3 = new int[img.length][img[0].length];
         
         ImagemDigital.plotarImagem(img, "Imagem Original");
         
         for(int i = 0; i < img.length; i++){
             for(int j = 0; j < img[0].length; j++){
-                if(img[i][j] < 64){
-                    img2[i][j] = (int) (0.5 * img[i][j]);
-                }
-                else if(img[i][j] >= 64 && img[i][j] <= 192){
-                    img2[i][j] = (int) ((1.5 * img[i][j]) - 65);
+                if(img[i][j] < 107){
+                    img3[i][j] = 0;
                 }
                 else{
-                    img2[i][j] = (int) ((0.5 * img[i][j]) + 128);
+                    img3[i][j] = 255;
                 }
             }
         }
-        correcao(img2);
-        ImagemDigital.plotarImagem(img2, "Img2");
+        correcao(img3);
+        ImagemDigital.plotarImagem(img3, "Img3");
     }
     
 }

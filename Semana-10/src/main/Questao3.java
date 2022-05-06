@@ -11,6 +11,9 @@ import imagemDigital.ImagemDigital;
  * @author michel
  */
 public class Questao3 {
+   /* static float getBase(float gama){
+        float x = Math.pow(10,(Math.log(P)/ Math.pow(P, gama)));
+    }*/
     public static void main(String[] args) {
         int[][] img = ImagemDigital.carregarImagem("./imagens/Fig0308(a)(fractured_spine).png");
         int[][] img1 = new int[img.length][img[0].length];
@@ -19,11 +22,20 @@ public class Questao3 {
         
         ImagemDigital.plotarImagem(img, "Imagem Original");
         
-        
+        double gama1 = 0.6;
+        double gama2 = 0.5;
+        double gama3 = 0.4;
+        double C;
         for(int i = 0; i < img.length; i++){
             for(int j = 0; j < img[0].length; j++){
                 
-                img1[i][j] = (int) ((double)((0.6*254) / Math.log(1+img[i][j]))); //s = c log(1+r)
+                C =  Math.pow(Math.E,(Math.log(img1[i][j])/ (Math.pow(img1[i][j], gama1))));
+                Math.lo
+                System.out.println(C);
+                
+                //C = (255 - 1) / Math.log(255);
+                
+                img1[i][j] = (int)(C * Math.log(1 + img1[i][j]));
 
             } 
         }
