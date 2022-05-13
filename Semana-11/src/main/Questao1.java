@@ -61,6 +61,7 @@ public class Questao1 {
     public static void main(String[] args) {
         
         for(int i = 0; i< 7; i++){
+            //int i = 6;
             int[][] img = ImagemDigital.carregarImagem("./imagens/"+ i + ".png");
             int[][] out = new int[img.length][img[0].length];
 
@@ -75,8 +76,8 @@ public class Questao1 {
             atualizarCores(mapaCores, img, out);
             ImagemDigital.plotarImagem(img, "original " + i);
             ImagemDigital.plotarImagem(out, "saida " + i);
-            new Histograma(histograma,"antes " + i);
-            new Histograma(mapaCores,"depois " + i);
+            new Histograma(histograma,"Antes " + i);
+            new Histograma(mapaCores,"Depois " + i);
               
         }
         

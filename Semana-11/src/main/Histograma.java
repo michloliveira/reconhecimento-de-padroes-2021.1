@@ -11,7 +11,6 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.statistics.HistogramDataset;
 
 /**
  *
@@ -38,7 +37,7 @@ public class Histograma extends JFrame{
         
          
         JFreeChart chart = ChartFactory.createBarChart(title, "",
-            "", dataSet, PlotOrientation.VERTICAL, true, false, false);
+            "", dataSet, PlotOrientation.VERTICAL, true,false,false);
         chart.setBackgroundPaint(Color.WHITE);
         
         ChartPanel painel =  new ChartPanel(chart);
